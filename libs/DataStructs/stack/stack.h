@@ -7,8 +7,22 @@
 #include <assert.h>
 
 #define STACK_OK 0
-#define STACK_OVER 101 
-#define STACK_UNDER 102
+#define STACK_OVER 101
+#define STACK_EMPTY 102
+#define STACK_ALLOCATE_MEM 103
+
+#define ERROR_HANDLING(ERR) \
+switch (ERR) { \
+    case 101: \
+        fprintf(stderr,"Warning: Stack over" "\n"); \
+        break; \
+    case 102: \
+        fprintf(stderr,"Warning: Stack empty" "\n"); \
+        break; \
+    case 103: \
+    fprintf(stderr,"Warning: Failed to allocate memory for stack" "\n"); \
+        break; \
+}
 
 typedef struct Stack{
     int top;
@@ -26,16 +40,16 @@ bool isEmptyStack(Stack *st);
 bool isFullStack(Stack *st);
 
 //Помещает элемент в стек
-void PutStack(Stack *st, int item);
+void Push(Stack *st, int item);
 
 // Извлекает элемент из стека
-void GetStack(Stack *st,int item);
+void Pop(Stack *st, int *item);
 
 // Считывает элемент из стека
-void ReadStack(Stack *st);
+void Peek(Stack *st, int *item);
 
 // Удаляет стек освобождая память
-void DoneStack(Stack *st);
+void DeleteStack(Stack *st);
 
 
 #include "stack.c"
